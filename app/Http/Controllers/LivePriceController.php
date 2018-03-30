@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class LivePriceController extends Controller
 {
-    public function test()
+    public function sendliveprice()
     {
         $orderbooks= array();
         for ($i = 0; $i < 7 ; $i++) { 
@@ -61,8 +61,33 @@ class LivePriceController extends Controller
             }
         };
 
-        // echo($message);
-        // $json = json_encode($orderbooks);
+        Line::pushMessage('Ua2b3dd43fdfaf129015087ee98896a5a',$message);
+    }
+
+    public function test()
+    {
+        $orderbooks= array();
+        for ($i = 0; $i < 7 ; $i++) { 
+            for ($j = 0; $j < 4 ; $j++) { 
+                $orderbooks[$i][$j][0] = json_decode(Redis::get(''.$i.".".$j))[0];
+                $orderbooks[$i][$j][1] = json_decode(Redis::get(''.$i.".".$j))[1];
+                $orderbooks[$i]['exchange'] = Redis::get(''.$i.".e");
+            }
+        }
+
+        $profit = array();
+        $profit[0]=round((($orderbooks[0][3][0]-$orderbooks[4][3][0])/$orderbooks[4][3][0]*100),4);
+        $profit[1]=round((($orderbooks[0][3][1]-$orderbooks[4][3][0])/$orderbooks[4][3][0]*100),4);
+        $profit[2]=round((($orderbooks[4][3][0]-$orderbooks[0][3][0])/$orderbooks[0][3][0]*100),4);
+        $profit[3]=round((($orderbooks[4][3][1]-$orderbooks[0][3][0])/$orderbooks[0][3][0]*100),4);
+        $message ="";
+
+        $message .= "Limit-Market: ";
+        $message .= "\r\nLimit-Limit: ";
+
+        $message .= "\r\nLimit-Market: ";
+        $message .= "\r\nLimit-Limit: ";
+
         Line::pushMessage('Ua2b3dd43fdfaf129015087ee98896a5a',$message);
     }
 }
