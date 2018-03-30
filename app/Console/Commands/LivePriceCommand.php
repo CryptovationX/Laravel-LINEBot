@@ -49,7 +49,7 @@ class LivePriceCommand extends Command
             }
         }
 
-        $message ="Bitcoin Price in USD (% vs Bx)\r\n";
+        $message ="Bitcoin Price in USD (% เทียบ Bx)\r\n";
 
         $message .= $orderbooks[2]['exchange'].": ";
         $message .= round($orderbooks[2][0][0],2)." (0%)\r\n";
@@ -62,7 +62,7 @@ class LivePriceCommand extends Command
             }
         };
 
-        $message .="\r\nEthereum Price in USD (% vs Bx)\r\n";
+        $message .="\r\nEthereum Price in USD (% เทียบ Bx)\r\n";
 
         $message .= $orderbooks[2]['exchange'].": ";
         $message .= round($orderbooks[2][1][0],2)." (0%)\r\n";
@@ -75,7 +75,7 @@ class LivePriceCommand extends Command
             }
         };
 
-        $message .="\r\nRipple Price in USD (% vs Bx)\r\n";
+        $message .="\r\nRipple Price in USD (% เทียบ Bx)\r\n";
 
         $message .= $orderbooks[2]['exchange'].": ";
         $message .= round($orderbooks[2][2][0],4)." (0%)\r\n";
@@ -90,6 +90,6 @@ class LivePriceCommand extends Command
             }
         };
 
-        Line::pushMessage('Ua2b3dd43fdfaf129015087ee98896a5a',$message);
+        Line::pushMessage('C25cf6c120577cb6086ec575eb40cf6c6',$message);
     }
 }
